@@ -1,0 +1,37 @@
+name: Deploy Hono Lambda
+
+on:
+push:
+branches:
+  - main
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
+
+  - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: 24
+
+  - name: Install deps
+    run: npm ci
+
+  - name: Build
+    run: npm run build
+
+  - name: Zip
+    run: npm run zip
+
+  - name: Deploy to Lambda
+    uses: appleboy/lambda-action@v0.1.5
+    with:
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_region: ${{ secrets.AWS_REGION }}
+      function_name: ${{ secrets.LAMBDA_FUNCTION_NAME }}
+      zip_file: lambda.zip

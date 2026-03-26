@@ -9,7 +9,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "build": "esbuild --bundle --outfile=./dist/index.js --platform=node --target=node24 ./src/server.ts",
+    "build": "esbuild src/server.ts --bundle --platform=node --target=node24 --outfile=dist/index.js --minify",
     "zip": "zip -j lambda.zip dist/index.js"
   },
   "devDependencies": {
