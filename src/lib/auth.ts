@@ -1,20 +1,9 @@
 import { env } from "@/env/envSchema";
 import { betterAuth } from "better-auth";
+import { organization, admin } from "better-auth/plugins";
 import type { Context, Next } from "hono";
 
 export const auth = betterAuth({
-  session: {
-    cookieCache: {
-      enabled: true,
-      maxAge: 7 * 24 * 60 * 60, // 7 days cache duration
-      strategy: "jwe", // can be "jwt" or "compact"
-      refreshCache: true, // Enable stateless refresh
-    },
-  },
-  account: {
-    storeStateStrategy: "cookie",
-    storeAccountCookie: true, // Store account data after OAuth flow in a cookie (useful for database-less flows)
-  },
   emailAndPassword: {
     enabled: true,
   },
@@ -24,6 +13,7 @@ export const auth = betterAuth({
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     },
   },
+  plugins: [organization(), admin()],
 });
 
 export type Auth = typeof auth;

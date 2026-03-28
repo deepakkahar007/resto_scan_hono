@@ -21,8 +21,9 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.7.6",
+    "@hono/zod-openapi": "^1.2.3",
     "@neondatabase/serverless": "^1.0.2",
+    "@scalar/hono-api-reference": "^0.10.5",
     "better-auth": "^1.5.6",
     "drizzle-orm": "^1.0.0-beta.19",
     "hono": "^4.12.9",
