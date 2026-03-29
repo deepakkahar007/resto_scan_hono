@@ -27,3 +27,6 @@ export const RestaurentTable = pgTable(
   },
   (t) => [index("restaurent_organization_id_idx").on(t.organization_id)],
 );
+
+export type CreateRestaurentType = typeof RestaurentTable.$inferInsert;
+export type SelectRestaurentType = typeof RestaurentTable.$inferSelect;

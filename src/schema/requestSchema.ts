@@ -15,7 +15,7 @@ export const createRestaurentSchema = createInsertSchema(RestaurentTable, {
   description: (s) =>
     s.trim().min(3, "the description must be at least 3 characters long"),
   slug: (s) => s.trim().min(3),
-  category: (s) => s.trim().min(3),
+  categories: (s) => s.trim().min(3),
   cuisine: (s) => s.default("indian"),
   icon: (s) => s.trim().min(3),
   cover_image: (s) => s.trim().min(3),
