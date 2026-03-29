@@ -20,10 +20,13 @@ export const RestaurentTable = pgTable(
     name: varchar().notNull(),
     slug: varchar().notNull(),
     description: text().notNull(),
-    category: varchar().notNull(),
+    categories: varchar().notNull(),
     icon: varchar().notNull(),
     cover_image: varchar(),
     cuisine: CuisineEnum().notNull(),
   },
   (t) => [index("restaurent_organization_id_idx").on(t.organization_id)],
 );
+
+export type CreateRestaurentType = typeof RestaurentTable.$inferInsert;
+export type SelectRestaurentType = typeof RestaurentTable.$inferSelect;

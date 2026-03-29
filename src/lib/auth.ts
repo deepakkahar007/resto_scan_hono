@@ -1,9 +1,14 @@
+import { db } from "@/drizzle/db";
 import { env } from "@/env/envSchema";
 import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { organization, admin } from "better-auth/plugins";
 import type { Context, Next } from "hono";
 
 export const auth = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: "pg",
+  }),
   emailAndPassword: {
     enabled: true,
   },

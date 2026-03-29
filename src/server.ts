@@ -22,5 +22,5 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
 
-export default app;
-// export const handler = handle(app);
+// export default app;
+export const handler = handle(app);

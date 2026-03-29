@@ -1,3 +1,5 @@
+import { createRestaurentMutation } from "@/drizzle/mutation";
+import { getAllResturentQuery } from "@/drizzle/query";
 import { createRouter } from "@/lib/createHono";
 import { createRestaurentSchema } from "@/schema/requestSchema";
 import { createRoute } from "@hono/zod-openapi";
@@ -36,9 +38,47 @@ restaurentRouter.openapi(
   async (c) => {
     const body = c.req.valid("json");
 
-    // TODO: Save to database
-    // const restaurent = await db.insert(restaurentTable).values(body);
+    const session = c.get("session");
 
-    return c.json({ id: "1", message: "Restaurent created successfully" }, 201);
+    const result = await createRestaurentMutation({
+      ...body,
+      organization_id: session?.userId!,
+    });
+
+    return c.json(
+      { id: result?.id!, message: "Restaurent created successfully" },
+      201,
+    );
+  },
+);
+
+restaurentRouter.openapi(
+  createRoute({
+    method: "get",
+    path: "/restaurent",
+    tags: ["Restaurent"],
+    responses: {
+      200: {
+        content: {
+          "application/json": {
+            schema: z.array(
+              z.object({
+                id: z.string(),
+                name: z.string(),
+                slug: z.string(),
+                organization_id: z.string(),
+                isActive: z.boolean(),
+              }),
+            ),
+          },
+        },
+        description: "Restaurent created successfully",
+      },
+    },
+  }),
+  async (c) => {
+    const result = await getAllResturentQuery();
+
+    return c.json(result, 200);
   },
 );
