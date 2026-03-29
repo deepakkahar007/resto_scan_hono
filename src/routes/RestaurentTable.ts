@@ -36,6 +36,9 @@ restaurentRouter.openapi(
   async (c) => {
     const body = c.req.valid("json");
 
+    // Do not accept organization_id from client payload.
+    // organization_id should come from authenticated context, not request JSON. Keeping it user-supplied opens cross-organization write risk.
+
     // TODO: Save to database
     // const restaurent = await db.insert(restaurentTable).values(body);
 

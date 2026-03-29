@@ -20,9 +20,9 @@ export const createRestaurentSchema = createInsertSchema(RestaurentTable, {
   icon: (s) => s.trim().min(3),
   cover_image: (s) => s.trim().min(3),
   isActive: (s) => s.default(true),
-  organization_id: (s) => s.trim().min(3),
 }).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+  organization_id: true,
 });

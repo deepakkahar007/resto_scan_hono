@@ -3,8 +3,8 @@ import { id, createdAt, isActive, updatedAt } from "./modelsHelper";
 import { RestaurentTable } from "./RestaurentTable";
 import { AddressTable } from "./AddressTable";
 
-export const CategoryTable = pgTable(
-  "category",
+export const CategoriesTable = pgTable(
+  "categories",
   {
     id,
     isActive,
@@ -24,7 +24,7 @@ export const CategoryTable = pgTable(
     pin_to_top: boolean().default(false),
   },
   (t) => [
-    index("category_restaurant_id_idx").on(t.restaurent_id),
-    index("category_address_id_idx").on(t.address_id),
+    index("categories_restaurant_id_idx").on(t.restaurent_id),
+    index("categories_address_id_idx").on(t.address_id),
   ],
 );

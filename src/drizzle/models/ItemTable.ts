@@ -7,7 +7,7 @@ import {
   ItemTypeEnum,
 } from "./modelsHelper";
 import { RestaurentTable } from "./RestaurentTable";
-import { CategoryTable } from "./CategoryTable";
+import { CategoriesTable } from "./CategoriesTable";
 
 export const ItemTable = pgTable(
   "item",
@@ -20,9 +20,9 @@ export const ItemTable = pgTable(
     restaurent_id: uuid()
       .notNull()
       .references(() => RestaurentTable.id),
-    category_id: uuid()
+    categories_id: uuid()
       .notNull()
-      .references(() => CategoryTable.id),
+      .references(() => CategoriesTable.id),
 
     name: varchar().notNull(),
     description: text().notNull(),
@@ -30,6 +30,6 @@ export const ItemTable = pgTable(
   },
   (t) => [
     index("item_restaurant_id_idx").on(t.restaurent_id),
-    index("item_category_id_idx").on(t.category_id),
+    index("item_category_id_idx").on(t.categories_id),
   ],
 );

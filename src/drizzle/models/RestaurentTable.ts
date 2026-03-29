@@ -20,7 +20,7 @@ export const RestaurentTable = pgTable(
     name: varchar().notNull(),
     slug: varchar().notNull(),
     description: text().notNull(),
-    category: varchar().notNull(),
+    categories: varchar().notNull(),
     icon: varchar().notNull(),
     cover_image: varchar(),
     cuisine: CuisineEnum().notNull(),
