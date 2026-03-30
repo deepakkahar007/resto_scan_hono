@@ -6,4 +6,4 @@ import { relations } from "./models/relations";
 
 const client = neon(env.DATABASE_URL);
 
-export const db = drizzle({ client, schema, relations });
+export const db = drizzle({ client, schema, relations, logger: true });
