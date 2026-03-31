@@ -1,4 +1,4 @@
-import { RestaurentTable } from "@/drizzle/models";
+import { AddressTable, RestaurentTable } from "@/drizzle/models";
 import {
   createSelectSchema,
   createInsertSchema,
@@ -25,4 +25,18 @@ export const createRestaurentSchema = createInsertSchema(RestaurentTable, {
   createdAt: true,
   updatedAt: true,
   organization_id: true,
+});
+
+export const createAddressSchema = createInsertSchema(AddressTable, {
+  address: (s) => s.trim().min(3, "address must be at least 3 characters long"),
+  city: (s) => s.trim().min(3, "city must be at least 3 characters long"),
+  state: (s) => s.trim().min(3, "state must be at least 3 characters long"),
+  country: (s) => s.trim().min(3, "country must be at least 3 characters long"),
+  zip: (s) => s.trim().length(6, "zip code must be 6 characters long"),
+  restaurent_id: (s) => s.trim().min(1, "restaurent id is required"),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  isActive: true,
 });

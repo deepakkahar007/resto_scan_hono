@@ -3,10 +3,11 @@ import { auth } from "@/lib/auth";
 import { configureOpenApi, createHonoApp } from "@/lib/createHono";
 import { userRouter } from "@/routes/UserRouter";
 import { restaurentRouter } from "@/routes/RestaurentTable";
+import { addressRouter } from "./routes/AddressRouter";
 
 const app = createHonoApp();
 
-const routes = [userRouter, restaurentRouter];
+const routes = [userRouter, restaurentRouter, addressRouter];
 
 configureOpenApi(app);
 

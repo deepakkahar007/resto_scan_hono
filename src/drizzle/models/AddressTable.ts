@@ -21,3 +21,6 @@ export const AddressTable = pgTable(
   },
   (t) => [index("address_restaurant_id_idx").on(t.restaurent_id)],
 );
+
+export type AddressType = typeof AddressTable.$inferSelect;
+export type CreateAddressType = typeof AddressTable.$inferInsert;
